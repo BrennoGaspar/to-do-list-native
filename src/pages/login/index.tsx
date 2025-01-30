@@ -11,8 +11,11 @@ import Logo from '../../assets/list.png'
 import { themas } from "../../global/themes";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
+import {useNavigation, NavigationProp} from '@react-navigation/native';
 
 export default function Login(){
+
+    const navigation = useNavigation<NavigationProp<any>>();
 
     const[username, setUsername] = useState('');
     const[password, setPassword] = useState('');
@@ -25,14 +28,13 @@ export default function Login(){
                 return Alert.alert('Atenção', 'Informe os campos obrigatórios!')
             }
 
-            if(username === 'Brenno' && password === '123'){
-                return Alert.alert('Identificado!', 'Você é o Brenno.')
-            }
+            navigation.navigate('BottomRoutes')
             
-        }catch (err) {
+        }catch (err){
             console.log(err)
+        }finally{
+            setLoading(false)
         }
-        setLoading(false)
     }
 
     return(
